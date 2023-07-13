@@ -1,0 +1,16 @@
+services:
+  dozzle:
+    container_name: dozzle
+    image: amir20/dozzle:latest
+    ports: ["9999:8080"]
+    restart: always
+    volumes: ["/var/run/docker.sock:/var/run/docker.sock:ro"]
+
+  watchtower:
+    container_name: watchtower
+    environment:
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_TIMEOUT=60s
+    image: containrrr/watchtower:latest
+    restart: always
+    volumes: ["/var/run/docker.sock:/var/run/docker.sock:ro"]
